@@ -1,0 +1,80 @@
+<!-- views/admin/edit-book.ejs -->
+<%- include('layout', {title: 'Edit Buku', user: user}) %>
+
+<div class="py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Edit Buku</h1>
+        <a href="/admin/books" class="btn btn-secondary">
+            <i class="fas fa-arrow-left"></i> Kembali
+        </a>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <form method="POST" action="/admin/books/edit/<%= book.id %>">
+                        <div class="mb-3">
+                            <label for="title" class="form-label">Judul Buku</label>
+                            <input type="text" class="form-control" id="title" name="title" value="<%= book.title %>" required>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="author" class="form-label">Penulis</label>
+                            <input type="text" class="form-control" id="author" name="author" value="<%= book.author %>" required>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="year" class="form-label">Tahun Terbit</label>
+                                    <input type="number" class="form-control" id="year" name="year" value="<%= book.year %>" min="1000" max="2025" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="category" class="form-label">Kategori</label>
+                                    <select class="form-control" id="category" name="category" required>
+                                        <option value="Novel" <%= book.category === 'Novel' ? 'selected' : '' %>>Novel</option>
+                                        <option value="Biografi" <%= book.category === 'Biografi' ? 'selected' : '' %>>Biografi</option>
+                                        <option value="Sejarah" <%= book.category === 'Sejarah' ? 'selected' : '' %>>Sejarah</option>
+                                        <option value="Teknologi" <%= book.category === 'Teknologi' ? 'selected' : '' %>>Teknologi</option>
+                                        <option value="Sains" <%= book.category === 'Sains' ? 'selected' : '' %>>Sains</option>
+                                        <option value="Pendidikan" <%= book.category === 'Pendidikan' ? 'selected' : '' %>>Pendidikan</option>
+                                        <option value="Agama" <%= book.category === 'Agama' ? 'selected' : '' %>>Agama</option>
+                                        <option value="Lainnya" <%= book.category === 'Lainnya' ? 'selected' : '' %>>Lainnya</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="available" name="available" <%= book.available ? 'checked' : '' %>>
+                                <label class="form-check-label" for="available">
+                                    Buku Tersedia
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <a href="/admin/books" class="btn btn-secondary me-md-2">
+                                <i class="fas fa-times"></i> Batal
+                            </a>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> Update Buku
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+            </main>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

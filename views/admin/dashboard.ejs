@@ -1,0 +1,107 @@
+<!-- views/admin/dashboard.ejs -->
+<%- include('layout', {title: 'Dashboard', user: user}) %>
+
+<div class="py-4">
+    <h1>Dashboard Admin</h1>
+    <p class="text-muted">Selamat datang di panel administrasi perpustakaan</p>
+    
+    <!-- Statistics Cards -->
+    <div class="row mb-4">
+        <div class="col-md-4">
+            <div class="card bg-primary text-white">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h5>Total Buku</h5>
+                            <h2><%= stats.totalBooks %></h2>
+                        </div>
+                        <div class="align-self-center">
+                            <i class="fas fa-book fa-2x"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card bg-success text-white">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h5>Buku Tersedia</h5>
+                            <h2><%= stats.availableBooks %></h2>
+                        </div>
+                        <div class="align-self-center">
+                            <i class="fas fa-check-circle fa-2x"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card bg-warning text-white">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h5>Buku Dipinjam</h5>
+                            <h2><%= stats.borrowedBooks %></h2>
+                        </div>
+                        <div class="align-self-center">
+                            <i class="fas fa-bookmark fa-2x"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Books -->
+    <div class="card">
+        <div class="card-header">
+            <h5><i class="fas fa-list"></i> Buku Terbaru</h5>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Judul</th>
+                            <th>Penulis</th>
+                            <th>Tahun</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% books.slice(-5).reverse().forEach(book => { %>
+                        <tr>
+                            <td><%= book.id %></td>
+                            <td><%= book.title %></td>
+                            <td><%= book.author %></td>
+                            <td><%= book.year %></td>
+                            <td>
+                                <% if (book.available) { %>
+                                <span class="badge bg-success">Tersedia</span>
+                                <% } else { %>
+                                <span class="badge bg-warning">Dipinjam</span>
+                                <% } %>
+                            </td>
+                        </tr>
+                        <% }); %>
+                    </tbody>
+                </table>
+            </div>
+            <div class="text-center mt-3">
+                <a href="/admin/books" class="btn btn-primary">
+                    <i class="fas fa-eye"></i> Lihat Semua Buku
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+            </main>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
