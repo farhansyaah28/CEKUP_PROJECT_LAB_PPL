@@ -1,0 +1,204 @@
+<!-- views/error.ejs -->
+<%- include('partials/header', {title: 'Error'}) %> <%-
+include('partials/navbar') %>
+
+<main class="flex-1 flex items-center justify-center min-h-screen py-12">
+  <div class="max-w-lg mx-auto px-4 text-center">
+    <div class="bg-white rounded-2xl shadow-xl p-8 relative overflow-hidden">
+      <!-- Background Pattern -->
+      <div class="absolute inset-0 opacity-5">
+        <div
+          class="absolute -top-10 -right-10 w-32 h-32 bg-red-500 rounded-full"
+        ></div>
+        <div
+          class="absolute -bottom-10 -left-10 w-24 h-24 bg-blue-500 rounded-full"
+        ></div>
+      </div>
+
+      <!-- Error Icon Animation -->
+      <div class="mb-8 relative z-10">
+        <div
+          class="bg-red-100 w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-6 animate-pulse"
+        >
+          <i class="fas fa-exclamation-triangle text-4xl text-red-600"></i>
+        </div>
+        <div class="animate-bounce">
+          <i class="fas fa-sad-tear text-5xl text-gray-400"></i>
+        </div>
+      </div>
+
+      <!-- Error Code -->
+      <div class="mb-6">
+        <% if (typeof status !== 'undefined') { %>
+        <div class="text-6xl font-bold text-red-500 mb-2"><%= status %></div>
+        <% } %>
+        <div
+          class="text-lg font-semibold text-gray-500 uppercase tracking-wider"
+        >
+          <%= (typeof status !== 'undefined' && status === 404) ? 'Halaman Tidak
+          Ditemukan' : 'Terjadi Kesalahan' %>
+        </div>
+      </div>
+
+      <!-- Error Message -->
+      <h1 class="text-3xl font-bold text-gray-800 mb-4">
+        Oops! Ada yang Salah
+      </h1>
+      <p class="text-gray-600 mb-8 leading-relaxed text-lg">
+        <%= message || 'Maaf, halaman yang Anda cari tidak dapat ditemukan atau
+        terjadi kesalahan pada server.' %>
+      </p>
+
+      <!-- Action Buttons -->
+      <div class="space-y-4 mb-8">
+        <a
+          href="/"
+          class="block bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-8 py-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+        >
+          <i class="fas fa-home mr-2"></i>
+          Kembali ke Beranda
+        </a>
+
+        <div class="flex gap-3">
+          <button
+            onclick="history.back()"
+            class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 px-6 py-3 rounded-xl font-semibold transition-colors"
+          >
+            <i class="fas fa-arrow-left mr-2"></i>
+            Kembali
+          </button>
+          <button
+            onclick="location.reload()"
+            class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 px-6 py-3 rounded-xl font-semibold transition-colors"
+          >
+            <i class="fas fa-redo mr-2"></i>
+            Muat Ulang
+          </button>
+        </div>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="border-t pt-6 mb-6">
+        <h3 class="text-lg font-semibold text-gray-700 mb-4">
+          Atau coba halaman lain:
+        </h3>
+        <div class="flex flex-wrap justify-center gap-2">
+          <a
+            href="/books"
+            class="bg-blue-50 hover:bg-blue-100 text-blue-700 px-4 py-2 rounded-lg text-sm font-medium transition-colors"
+          >
+            <i class="fas fa-book mr-1"></i>
+            Katalog Buku
+          </a>
+          <a
+            href="/about"
+            class="bg-purple-50 hover:bg-purple-100 text-purple-700 px-4 py-2 rounded-lg text-sm font-medium transition-colors"
+          >
+            <i class="fas fa-info-circle mr-1"></i>
+            Tentang Kami
+          </a>
+          <a
+            href="/admin/login"
+            class="bg-green-50 hover:bg-green-100 text-green-700 px-4 py-2 rounded-lg text-sm font-medium transition-colors"
+          >
+            <i class="fas fa-user-shield mr-1"></i>
+            Admin
+          </a>
+        </div>
+      </div>
+
+      <!-- Help Section -->
+      <div
+        class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-6 border border-blue-100"
+      >
+        <div class="flex items-start space-x-3">
+          <div class="bg-blue-100 p-2 rounded-lg flex-shrink-0">
+            <i class="fas fa-life-ring text-blue-600"></i>
+          </div>
+          <div class="text-left">
+            <h4 class="font-semibold text-blue-900 mb-2">Butuh Bantuan?</h4>
+            <p class="text-sm text-blue-800 mb-3">
+              Jika masalah berlanjut, jangan ragu untuk menghubungi tim support
+              kami
+            </p>
+            <div class="flex flex-col sm:flex-row gap-2 text-sm">
+              <a
+                href="mailto:info@perpustakaandigital.com"
+                class="flex items-center text-blue-700 hover:text-blue-900 transition-colors"
+              >
+                <i class="fas fa-envelope mr-2"></i>
+                info@perpustakaandigital.com
+              </a>
+              <a
+                href="tel:+62211234567"
+                class="flex items-center text-blue-700 hover:text-blue-900 transition-colors"
+              >
+                <i class="fas fa-phone mr-2"></i>
+                (021) 1234-5678
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Error ID for Support -->
+      <div class="mt-6 pt-4 border-t border-gray-100">
+        <p class="text-xs text-gray-400">
+          Error ID: ERR-<%= Date.now() %>
+          <br />
+          Timestamp: <%= new Date().toLocaleString('id-ID') %>
+        </p>
+      </div>
+    </div>
+
+    <!-- Additional Help Card -->
+    <div class="mt-6 bg-white rounded-xl shadow-lg p-6">
+      <h3 class="font-semibold text-gray-800 mb-3">Tips Mengatasi Masalah:</h3>
+      <div class="space-y-2 text-sm text-gray-600 text-left">
+        <div class="flex items-start space-x-2">
+          <i class="fas fa-check-circle text-green-500 mt-0.5"></i>
+          <span>Periksa koneksi internet Anda</span>
+        </div>
+        <div class="flex items-start space-x-2">
+          <i class="fas fa-check-circle text-green-500 mt-0.5"></i>
+          <span>Coba muat ulang halaman</span>
+        </div>
+        <div class="flex items-start space-x-2">
+          <i class="fas fa-check-circle text-green-500 mt-0.5"></i>
+          <span>Bersihkan cache browser</span>
+        </div>
+        <div class="flex items-start space-x-2">
+          <i class="fas fa-check-circle text-green-500 mt-0.5"></i>
+          <span>Gunakan browser yang berbeda</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script>
+  // Auto redirect to home after 30 seconds (optional)
+  let countdown = 30;
+  const redirectTimer = setInterval(() => {
+    countdown--;
+    if (countdown <= 0) {
+      clearInterval(redirectTimer);
+      window.location.href = "/";
+    }
+  }, 1000);
+
+  // Stop auto redirect if user interacts with page
+  document.addEventListener("click", () => {
+    clearInterval(redirectTimer);
+  });
+
+  // Report error to analytics (optional)
+  if (typeof gtag !== "undefined") {
+    gtag("event", "exception", {
+      description: '<%= message || "Unknown error" %>',
+      fatal: false,
+    });
+  }
+</script>
+
+<%- include('partials/footer') %>

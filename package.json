@@ -1,0 +1,28 @@
+{
+  "name": "aplikasi-perpustakaan",
+  "version": "1.0.0",
+  "description": "Aplikasi manajemen perpustakaan dengan Express.js",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.7",
+    "ejs": "^3.1.10",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  },
+  "keywords": [
+    "express",
+    "library",
+    "management",
+    "crud"
+  ],
+  "author": "kita_kita",
+  "license": "MIT"
+}

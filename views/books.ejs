@@ -1,0 +1,175 @@
+<!-- views/books.ejs -->
+<%- include('partials/header', {title: 'Katalog Buku'}) %>
+<%- include('partials/navbar') %>
+
+<main class="flex-1">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Header -->
+        <div class="text-center mb-12">
+            <h1 class="text-4xl font-bold text-gray-800 mb-4">Katalog Buku</h1>
+            <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                Jelajahi koleksi lengkap buku-buku berkualitas yang tersedia di perpustakaan digital kami
+            </p>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="max-w-2xl mx-auto mb-8">
+            <div class="relative">
+                <input type="text" id="searchInput" placeholder="Cari buku, penulis, atau kategori..." 
+                       class="w-full px-6 py-4 text-lg border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:outline-none transition-colors pl-14">
+                <i class="fas fa-search absolute left-5 top-1/2 transform -translate-y-1/2 text-gray-400 text-lg"></i>
+            </div>
+        </div>
+
+        <!-- Filter Tabs -->
+        <div class="flex flex-wrap justify-center gap-2 mb-8">
+            <button class="filter-btn active px-6 py-2 rounded-full font-medium transition-all" data-category="all">
+                Semua Kategori
+            </button>
+            <button class="filter-btn px-6 py-2 rounded-full font-medium transition-all" data-category="Fiksi">
+                Fiksi
+            </button>
+            <button class="filter-btn px-6 py-2 rounded-full font-medium transition-all" data-category="Non-Fiksi">
+                Non-Fiksi
+            </button>
+            <button class="filter-btn px-6 py-2 rounded-full font-medium transition-all" data-category="Teknologi">
+                Teknologi
+            </button>
+            <button class="filter-btn px-6 py-2 rounded-full font-medium transition-all" data-category="Sejarah">
+                Sejarah
+            </button>
+        </div>
+
+        <!-- Books Grid -->
+        <div id="booksGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <% books.forEach(book => { %>
+            <div class="book-card bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2" 
+                 data-category="<%= book.category %>" data-title="<%= book.title.toLowerCase() %>" data-author="<%= book.author.toLowerCase() %>">
+                <div class="bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 h-40 flex items-center justify-center">
+                    <div class="text-center text-white">
+                        <i class="fas fa-book-open text-4xl mb-2"></i>
+                        <div class="text-xs opacity-75">Digital Book</div>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="font-bold text-lg text-gray-800 mb-3 line-clamp-2 min-h-[3.5rem]">
+                        <%= book.title %>
+                    </h3>
+                    <div class="space-y-2 text-sm text-gray-600 mb-6">
+                        <div class="flex items-center">
+                            <i class="fas fa-user w-4 text-gray-400 mr-3"></i>
+                            <span class="font-medium"><%= book.author %></span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-calendar w-4 text-gray-400 mr-3"></i>
+                            <span><%= book.year %></span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-tag w-4 text-gray-400 mr-3"></i>
+                            <span class="px-2 py-1 bg-blue-100 text-blue-800 rounded-md text-xs font-medium">
+                                <%= book.category %>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-800">
+                            <div class="w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse"></div>
+                            Tersedia
+                        </span>
+                        <button class="text-blue-600 hover:text-blue-800 font-medium text-sm transition-colors">
+                            Detail <i class="fas fa-arrow-right ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <% }); %>
+        </div>
+
+        <!-- No Results Message -->
+        <div id="noResults" class="hidden text-center py-16">
+            <div class="max-w-md mx-auto">
+                <i class="fas fa-search text-6xl text-gray-300 mb-4"></i>
+                <h3 class="text-xl font-semibold text-gray-600 mb-2">Tidak ada buku yang ditemukan</h3>
+                <p class="text-gray-500">Coba gunakan kata kunci yang berbeda atau pilih kategori lain</p>
+            </div>
+        </div>
+
+        <% if (books.length === 0) { %>
+        <div class="text-center py-16">
+            <div class="max-w-md mx-auto">
+                <i class="fas fa-book text-6xl text-gray-300 mb-4"></i>
+                <h3 class="text-xl font-semibold text-gray-600 mb-2">Belum ada buku tersedia</h3>
+                <p class="text-gray-500">Koleksi buku akan segera ditambahkan</p>
+            </div>
+        </div>
+        <% } %>
+    </div>
+</main>
+
+<script>
+    // Search functionality
+    const searchInput = document.getElementById('searchInput');
+    const booksGrid = document.getElementById('booksGrid');
+    const noResults = document.getElementById('noResults');
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    
+    let currentCategory = 'all';
+    
+    // Filter button styles
+    filterBtns.forEach(btn => {
+        if (btn.classList.contains('active')) {
+            btn.classList.add('bg-blue-600', 'text-white');
+        } else {
+            btn.classList.add('bg-gray-100', 'text-gray-600', 'hover:bg-gray-200');
+        }
+    });
+    
+    function filterBooks() {
+        const searchTerm = searchInput.value.toLowerCase();
+        const bookCards = document.querySelectorAll('.book-card');
+        let visibleCount = 0;
+        
+        bookCards.forEach(card => {
+            const title = card.dataset.title;
+            const author = card.dataset.author;
+            const category = card.dataset.category;
+            
+            const matchesSearch = title.includes(searchTerm) || author.includes(searchTerm);
+            const matchesCategory = currentCategory === 'all' || category === currentCategory;
+            
+            if (matchesSearch && matchesCategory) {
+                card.style.display = 'block';
+                visibleCount++;
+            } else {
+                card.style.display = 'none';
+            }
+        });
+        
+        if (visibleCount === 0) {
+            noResults.classList.remove('hidden');
+            booksGrid.classList.add('hidden');
+        } else {
+            noResults.classList.add('hidden');
+            booksGrid.classList.remove('hidden');
+        }
+    }
+    
+    searchInput.addEventListener('input', filterBooks);
+    
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            // Update active button
+            filterBtns.forEach(b => {
+                b.classList.remove('active', 'bg-blue-600', 'text-white');
+                b.classList.add('bg-gray-100', 'text-gray-600', 'hover:bg-gray-200');
+            });
+            btn.classList.add('active', 'bg-blue-600', 'text-white');
+            btn.classList.remove('bg-gray-100', 'text-gray-600', 'hover:bg-gray-200');
+            
+            currentCategory = btn.dataset.category;
+            filterBooks();
+        });
+    });
+</script>
+
+<%- include('partials/footer') %>
