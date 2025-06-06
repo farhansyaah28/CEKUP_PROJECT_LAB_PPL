@@ -32,3 +32,22 @@ JavaScript: Interaktivitas dan UX enhancement
 Node.js (versi 14 atau lebih baru)
 npm atau yarn
 Browser modern (Chrome, Firefox, Safari, Edge)
+
+## Instalasi
+1. Clone repository:
+```bash
+git clone [URL_REPOSITORY]
+cd CEKUP_PROJECT_LAB_PPL
+```
+
+2. Install dependencies:
+```bash
+# Initialize npm
+npm init -y
+
+# Install dependencies
+npm install express ejs bcryptjs jsonwebtoken cookie-parser
+
+# Install dev dependencies
+npm install --save-dev nodemon
+```
