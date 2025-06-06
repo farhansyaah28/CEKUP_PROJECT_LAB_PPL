@@ -1,4 +1,4 @@
-#Aplikasi Cek Buku Perpustakaan 
+#Aplikasi Cek Buku Perpustakaan#
 Aplikasi web lengkap untuk manajemen perpustakaan yang dibangun dengan Express.js dan EJS. Aplikasi ini memiliki halaman publik untuk pengunjung umum dan dashboard admin untuk mengelola data buku dengan fitur CRUD lengkap.
 🚀 Fitur Utama
 Halaman Publik (User Umum)
