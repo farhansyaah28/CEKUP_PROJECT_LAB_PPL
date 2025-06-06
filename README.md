@@ -51,3 +51,39 @@ npm install express ejs bcryptjs jsonwebtoken cookie-parser
 # Install dev dependencies
 npm install --save-dev nodemon
 ```
+
+3. Jalankan server development
+```bash
+node app.js   
+```
+
+4. Struktur Website
+```bash
+aplikasi-perpustakaan/
+├── app.js
+├── package.json
+├── views/
+│   ├── partials/
+│   │   ├── header.ejs
+│   │   ├── footer.ejs
+│   │   └── navbar.ejs
+│   ├── admin/
+│   │   ├── layout.ejs
+│   │   ├── login.ejs
+│   │   ├── dashboard.ejs
+│   │   ├── books.ejs
+│   │   ├── add-book.ejs
+│   │   ├── edit-book.ejs
+│   │   └── error.ejs
+│   ├── index.ejs
+│   ├── books.ejs
+│   ├── about.ejs
+│   └── error.ejs
+├── public/
+│   ├── css/
+│   │   └── style.css
+│   ├── js/
+│   │   └── main.js
+│   └── images/
+└── README.md
+```
